@@ -1,0 +1,24 @@
+#include <stdio.h>  
+#include <string.h>  
+  
+  
+char *reverse(char *s)  
+{  
+    char t, *p = s,*q = (s + (strlen(s) - 1));
+  
+    while (p < q)                       
+    {  
+        t = *p;                         
+        *p++ = *q;  
+        *q-- = t;  
+    }  
+    return(s);  
+}  
+  
+int main()  
+{  
+     char str[] = "abcdefw";
+     printf("初始字符串：'%s'\n",str);
+     printf("翻转后的字符串：'%s'\n", reverse(str));  
+     return 0;  
+}
