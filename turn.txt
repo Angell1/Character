@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <string.h>
+ 
+void left(char *s ,int len)
+{
+    char t = s[0];
+    int i;
+    for (i = 1;i<len;i++)
+    {
+        s[i-1] = s[i];
+    }
+    s[len-1] = t;
+}
+
+void right(char *s ,int len)
+{
+    char t = s[len-1];
+    int i;
+    for (i = len - 1;i>0;i--)
+    {
+        s[i] = s[i-1];
+    }
+    s[0] = t;
+}
+
+
+int main ()
+{
+   char str1[12] = "Hello";
+   char str2[12] = "world";
+   int  len1,len2 ;
+   len1 = strlen(str1);
+   len2 = strlen(str2);
+   
+   
+   //开始左移位字符串
+   printf("初始字符串：%s\n",str1);
+   int i = 0;
+   for(;i<len1;i++)
+   {
+           left(str1,len1);
+           printf("第%d次移位字符串的结果：%s\n",i+1,str1);
+   }
+
+
+   //开始右移位字符串
+   printf("初始字符串：%s\n",str2);
+   i = 0;
+   for(;i<len2;i++)
+   {
+           right(str2,len2);
+           printf("第%d次移位字符串的结果：%s\n",i+1,str2);
+   }
+   return 0;
+}
