@@ -1,0 +1,49 @@
+#include <stdio.h>  
+#include <string.h>  
+
+//数字转换为字符串
+char* hitoa(char *a,int num, int len)
+{
+
+    int temp; 
+    int ti = num;
+    int i = 0, j = 0;
+   
+
+    while (ti)  {
+        a[i] = ti%10 + '0';     //取最后一个数，并转换成ASCII编码值保存到字符数组中
+        i++;                    //向后移动一位，保存下一个字符
+        ti /= 10;               //取得已经去掉几位的整数
+    }  
+    a[i] = '\0';                //这里一定要记住最后的'\0'
+    i -= 1;                     //这里i也要注意是到最后一个非'\0'字符进行反转
+    for (; j < i;) {            //把得到的字符串反转一下
+        temp= a[i];
+        a[i--] = a[j];
+        a[j++] = temp;
+      
+    }
+    return a;
+}
+
+//计算数字位数
+int Count(n){
+    int total = 0;
+     while(n)
+    {
+        n /= 10;
+        ++total;
+    }
+    return total;
+}
+
+int main()  
+{      
+     int n = 2324332;
+     int count = Count(n);
+     printf("%d为：%d位数\n",n,count);
+     char str[count];
+     hitoa(str,n,count);
+     printf("转换后的字符串：%s\n", str);
+     return 0;  
+}

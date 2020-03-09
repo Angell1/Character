@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <string.h>
+#define MaxValue 2147483647
+#define MinValue -2147483648
+int StringToint32(char s[])
+{
+
+
+      //检测字符串是否为空
+      if (strlen(s) == 0)
+      {
+        return 0;
+      }
+
+      int value = 0;    //存储最后的数字
+      int i = 0;        //字符串下标
+
+      //检测正负标记
+      int sign = 1;            //sign为数字正负标记，sign>0为正，反之为负，默认为正。
+      if (s[0] == '+' || s[0] == '-')
+      {
+        if (s[0] == '-')
+          sign = -1;
+        i++;            //当存在标记，则从下标为1的位置开始
+      }
+
+      while (i < strlen(s))
+      {
+        int c = s[i] - '0';  //当前的数字
+
+        //当发生正溢出时，返回最大值，int类型最大值为2147483647
+        if (sign > 0
+          && (value > MaxValue / 10
+            || (value == MaxValue / 10
+              && c >= MaxValue % 10)))
+        {
+          value = MaxValue;
+          break;
+        }
+        //当发生负溢出时，返回最小值，int类型最小值为-2147483648
+        else if (sign < 0
+          && (value > -(MinValue / 10)
+            || (value == -(MinValue / 10)
+              && c >= -(MinValue % 10))))
+        {
+          value = MinValue;
+          break;
+        }
+
+        //转换字符串
+        value = value * 10 + c;
+
+        i++;
+      }
+
+      return sign > 0? value: value == MinValue ? value : -value;
+}
+
+int main ()
+{
+   char str1[] = "-4242342";
+   printf("%d\n",StringToint32(str1));
+   char str2[] = "3234";
+   printf("%d\n",StringToint32(str2));
+   return 0;
+}

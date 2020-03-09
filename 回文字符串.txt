@@ -1,0 +1,28 @@
+#include <stdio.h>  
+#include <string.h>  
+int reverse(char *s)  
+{  
+    if(strlen(s) == 1 || strlen(s) == 0){
+        return 3;
+    }
+    char t, *p = s,*q = (s + (strlen(s) - 1));
+    while (p < q)                       
+    {                         
+        if(*p++ == *q--)
+        {
+            continue;
+        }
+        else
+        {
+            return 0;  
+        }
+    }  
+    return 1;  
+}  
+int main()  
+{  
+     char str[] = "ma3d3ma";
+     int bool = reverse(str);
+     printf("%d",bool);
+     return 0;  
+}

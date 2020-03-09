@@ -1,0 +1,29 @@
+#给定两个分别由字母组成的字符串 s1 和字符串 s2，如何最快地判断字符串 s2 中所有字母是否都在字符串 s1 里？
+#include <stdio.h>
+#include <string.h>
+
+int IsContainAllChars(char a[], char b[])
+    {
+      int hash = 0;
+      int lena = strlen(a),lenb = strlen(b);
+      for (int i = 0; i < lena; ++i)
+      {
+        hash |= (1 << (a[i] - 'A'));
+      }
+      for (int i = 0; i < lenb; ++i)
+      {
+        if ((hash & (1 << (b[i] - 'A'))) == 0)
+        {
+          return 0;
+        }
+      }
+      return 1;
+}
+int main ()
+{
+   char a[] = "aadwada";
+   char b[] = "dw";
+   int sign = IsContainAllChars(a,b);
+   printf("%d",sign);
+   return 0;
+}

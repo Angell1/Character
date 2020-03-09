@@ -1,0 +1,31 @@
+
+#在s1字符串中删除掉s2字符串中出现的每一个元素。
+#include <stdio.h>
+#include <string.h>
+
+void del_sub(char *str, char *sub)
+{
+    char *p;
+    int i, j;
+    int asc[128] = {0};                  //假设都是ACSII字符
+    for (p = sub; *p != '\0'; p++) {    //先给要删除的字符设置位1
+        asc[*p] = 1;
+    }  
+    for (i = 0, j = 0; i < strlen(str); i++) {  //遍历母串，把不删的字符复制给母串，
+        if (!asc[str[i]]) {   //不需要临时空间。
+            str[j] = str[i];    //注意遍历时，是strlen而不用减1了，细心点。
+            j++;
+        }  
+    }  
+    str[j] = '\0';      //这里要记住
+}
+
+
+int main ()
+{
+   char str1[] = "abc123";
+   char str2[] = "c3";
+   del_sub(str1,str2);
+   printf("%s",str1);
+   return 0;
+}
